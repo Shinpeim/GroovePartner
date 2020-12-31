@@ -6,21 +6,19 @@ on:
       - main
 
 jobs:
-  install node:
+  setup:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-    - run: npm install
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install
+      - run: git config user.email "shinpeim@gmail.com"
+      - run: git config user.name "Shinpei Maruyama"
 
   publish:
-    needs: [build]
+    needs: [setup]
     name: "publish to ghpages"
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: setup git config
-        run: git config user.email "shinpeim@gmail.com" && git config user.name "Shinpei Maruyama"
       - name: publish
         run:  bash ./publish.sh
