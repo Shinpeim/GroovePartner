@@ -12,5 +12,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+      - name: setup git config
+        run: git config user.email "shinpeim@gmail.com" && git config user.name "Shinpei Maruyama"
       - name: publish
         run:  bash ./publish.sh
