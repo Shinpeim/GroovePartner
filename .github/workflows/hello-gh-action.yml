@@ -10,6 +10,7 @@ jobs:
     name: "hello gh action"
     runs-on: ubuntu-latest
     steps:
-      - name: ls
+      - name: checkout
         uses: actions/checkout@v2
+      - name: ls repository
         run:  ls  
