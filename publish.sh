@@ -6,4 +6,4 @@ npm run build
 date=$(date)
 git add -f dist 
 git commit -m "$date"
-git push origin publish
+git push origin HEAD:publish
