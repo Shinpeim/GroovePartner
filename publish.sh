@@ -1,6 +1,6 @@
 #!/bin/bash
-
-git pull publish
+git fetch
+git checkout publish
 git merge --no-commit master
 npm run build
 date=$(date)
