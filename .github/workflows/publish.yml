@@ -1,4 +1,4 @@
-name: Hello GH Actions
+name: Publish
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
       - main
 
 jobs:
-  hello-gh-action:
-    name: "hello gh action"
+  publish:
+    name: "publish to ghpages"
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: ls repository
-        run:  ls  
+      - name: publish
+        run:  bash ./publish.sh
