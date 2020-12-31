@@ -1,0 +1,15 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello-gh-action:
+    name: "hello gh action"
+    runs-on: ubuntu-latest
+    steps:
+      - name: ls
+        uses: actions/checkout@v2
+        run:  ls  
