@@ -6,7 +6,15 @@ on:
       - main
 
 jobs:
+  install node:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+    - run: npm install
+
   publish:
+    needs: [build]
     name: "publish to ghpages"
     runs-on: ubuntu-latest
     steps:
