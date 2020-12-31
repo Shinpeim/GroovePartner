@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  setup:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,11 +14,5 @@ jobs:
       - run: npm install
       - run: git config user.email "shinpeim@gmail.com"
       - run: git config user.name "Shinpei Maruyama"
-
-  publish:
-    needs: [setup]
-    name: "publish to ghpages"
-    runs-on: ubuntu-latest
-    steps:
       - name: publish
         run:  bash ./publish.sh
