@@ -10,7 +10,6 @@ import { SoundType } from 'src/app/domain/soundType';
 })
 export class SequencerComponent implements OnInit {
 
-  noteLength: AvailableNoteLength = 16
   highNotes: Array<boolean> = []
   lowNotes: Array<boolean> = []
   noneNotes: Array<boolean> = []
@@ -21,12 +20,9 @@ export class SequencerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setNoteLength(16)
-  }
-
-  setNoteLength(length: AvailableNoteLength): void {
-    sequencerState.setNoteLength(length)
-    this.initNoteSubscriptions()
+    sequencerState.noteLength.subscribe((length) => 
+      this.initNoteSubscriptions()
+    )
   }
 
   setNoteHigh(index: number): void {
@@ -42,7 +38,6 @@ export class SequencerComponent implements OnInit {
   initNoteSubscriptions(): void {
     this.noteSubscriptions.forEach(s => s.unsubscribe())
 
-    console.log(sequencerState.notes)
     this.highNotes = sequencerState.notes.map((subject) => {
       return subject.getValue() == 'high'
     })
@@ -51,7 +46,7 @@ export class SequencerComponent implements OnInit {
       return subject.getValue() == 'low'
     })
 
-    this.lowNotes = sequencerState.notes.map((subject) => {
+    this.noneNotes = sequencerState.notes.map((subject) => {
       return subject.getValue() == 'none'
     })
 

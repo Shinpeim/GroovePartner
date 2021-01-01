@@ -1,0 +1,10 @@
+<div>
+    bpm:
+    <input type="number" name="bpm" min="40" max="280" [(ngModel)]="bpm">
+    note:
+    <select name="note-length" [(ngModel)]="selectedNoteLength" (change)="noteLengthChanged()">
+        <ng-container *ngFor="let option of noteLengthOptions">
+            <option [ngValue]="option.value">{{option.label}}</option>
+        </ng-container>
+    </select>
+</div>
