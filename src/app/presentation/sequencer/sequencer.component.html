@@ -1,0 +1,11 @@
+<div class=sequencer>
+    <div class="high-note">
+       <div *ngFor="let note of highNotes" [class.on]="note"></div>
+    </div>
+    <div class="low-note">
+       <div *ngFor="let note of lowNotes" [class.on]="note"></div>
+    </div>
+    <div class="none-note">
+       <div *ngFor="let note of noneNotes" [class.on]="note"></div>
+    </div>
+</div>
