@@ -1,11 +1,26 @@
 <div class=sequencer>
     <div class="high-note">
-       <div *ngFor="let note of highNotes" [class.on]="note"></div>
+        <div
+          *ngFor="let note of highNotes; index as i"
+          [class.on]="note"
+          (click)="setNoteHigh(i)"
+        >
+        </div>
     </div>
     <div class="low-note">
-       <div *ngFor="let note of lowNotes" [class.on]="note"></div>
+        <div
+          *ngFor="let note of lowNotes; index as i"
+          [class.on]="note"
+          (click)="setNoteLow(i)"
+        >
+        </div>
     </div>
     <div class="none-note">
-       <div *ngFor="let note of noneNotes" [class.on]="note"></div>
+        <div
+          *ngFor="let note of noneNotes; index as i" 
+          [class.on]="note"
+          (click)="setNoteNone(i)"
+        >
+    </div>
     </div>
 </div>

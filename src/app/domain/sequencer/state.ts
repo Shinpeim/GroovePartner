@@ -20,6 +20,16 @@ class SequencerState {
         this.initNotes(length)
     }
 
+    public setNoteHigh(index: number) {
+        this.notes[index].next('high')
+    }
+    public setNoteLow(index: number) {
+        this.notes[index].next('low')
+    }
+    public setNoteNone(index: number) {
+        this.notes[index].next('none')
+    }
+
     private initNotes(length: AvailableNoteLength) {
         this.notes = []
         const size = length / 4

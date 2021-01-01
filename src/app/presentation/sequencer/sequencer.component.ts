@@ -29,10 +29,19 @@ export class SequencerComponent implements OnInit {
     this.initNoteSubscriptions()
   }
 
+  setNoteHigh(index: number): void {
+    sequencerState.setNoteHigh(index)
+  }
+  setNoteLow(index: number): void {
+    sequencerState.setNoteLow(index)
+  }
+  setNoteNone(index: number): void {
+    sequencerState.setNoteNone(index)
+  }
+
   initNoteSubscriptions(): void {
     this.noteSubscriptions.forEach(s => s.unsubscribe())
 
-    console.log("@@@@@@@@@@")
     console.log(sequencerState.notes)
     this.highNotes = sequencerState.notes.map((subject) => {
       return subject.getValue() == 'high'
