@@ -1,6 +1,8 @@
 <div>
+    <input type="button" value="play" (click)="play()">
+    <input type="button" value="stop" (click)="stop()">
     bpm:
-    <input type="number" name="bpm" min="40" max="280" [(ngModel)]="bpm">
+    <input type="number" name="bpm" min="40" max="280" [(ngModel)]="bpm" (change)="bpmChanged()">
     note:
     <select name="note-length" [(ngModel)]="selectedNoteLength" (change)="noteLengthChanged()">
         <ng-container *ngFor="let option of noteLengthOptions">

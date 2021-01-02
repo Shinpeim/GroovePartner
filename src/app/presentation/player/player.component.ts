@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { playerState } from 'src/app/domain/player/state';
 import { AvailableNoteLength, availableNoteLengthes, sequencerState } from 'src/app/domain/sequencer/state';
 
 type NoteLengthOption = {
@@ -14,7 +15,7 @@ type NoteLengthOption = {
 export class PlayerComponent implements OnInit {
   noteLengthOptions:Array<NoteLengthOption>
   selectedNoteLength:AvailableNoteLength
-  bpm: number = 120
+  bpm: number
 
   constructor() {
     this.noteLengthOptions = availableNoteLengthes.map((length) => {
@@ -24,12 +25,25 @@ export class PlayerComponent implements OnInit {
       }
     })
     this.selectedNoteLength = sequencerState.noteLength.getValue()
+    this.bpm = playerState.bpm.getValue()
   }
 
   ngOnInit(): void {
   }
 
+  play(){
+    playerState.play()
+  }
+
+  stop(){
+    playerState.stop()
+  }
+
   noteLengthChanged(){
     sequencerState.setNoteLength(this.selectedNoteLength)
+  }
+
+  bpmChanged(){
+    playerState.setBpm(this.bpm)
   }
 }
