@@ -43,6 +43,7 @@ class PlayerState {
     }
 
     play(){
+        sound.resume();
         this.playingIndex = 0
         if (this.playingState.getValue()) {
             return;

@@ -1,3 +1,4 @@
+const AudioContext = window.AudioContext || (<any>window).webkitAudioContext
 class Sound {
     private context: AudioContext = new AudioContext({sampleRate: 48000})
     private lowBuffer: AudioBuffer
@@ -25,6 +26,10 @@ class Sound {
         		highData[i] = -0.6;
         	}
         }
+    }
+
+    resume(){
+        this.context.resume()
     }
 
     playLow(){
