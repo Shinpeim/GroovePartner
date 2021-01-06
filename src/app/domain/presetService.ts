@@ -1,7 +1,7 @@
 import { PlayerState, SerializedPlayerState } from "./player/state"
 import { SequencerState, SerializedSequencerState } from "./sequencer/state"
 
-const sessionStorageKey = 'presets'
+const localStorageKey = 'presets'
 
 const currentPresetsVersion = 1
 
@@ -30,29 +30,29 @@ const fallback: Preset = {
 }
 
 export function saveAs(key: string, sequencer: SequencerState, player: PlayerState): void{
-    const presets = loadPresetsFromSessionStarage()
+    const presets = loadPresetsFromLocalStarage()
     presets[key] = {
         version: currentPresetsVersion,
         playerState: player.unload(),
         sequencerState: sequencer.unload()
     }
-    sessionStorage.setItem(sessionStorageKey, JSON.stringify(presets))
+    localStorage.setItem(localStorageKey, JSON.stringify(presets))
 }
 
 export function removePreset(key: string): void{
-    const presets = loadPresetsFromSessionStarage()
+    const presets = loadPresetsFromLocalStarage()
     delete presets[key]
-    sessionStorage.setItem(sessionStorageKey, JSON.stringify(presets))
+    localStorage.setItem(localStorageKey, JSON.stringify(presets))
 }
 
 export function loadFromPreset(key: string, sequencer: SequencerState, player: PlayerState):void{
-    const preset = loadPresetsFromSessionStarage()[key]
+    const preset = loadPresetsFromLocalStarage()[key]
     sequencer.load(preset.sequencerState)
     player.load(preset.playerState)
 }
 
 export function loadPresetNames(): Array<string> {
-    const presets = loadPresetsFromSessionStarage()
+    const presets = loadPresetsFromLocalStarage()
     const names: Array<string> = []
     for (const k in presets) {
         names.push(k)
@@ -60,8 +60,8 @@ export function loadPresetNames(): Array<string> {
     return names;
 }
 
-function loadPresetsFromSessionStarage(): Presets{
-    const presetsFromStorage: Presets = JSON.parse(sessionStorage.getItem(sessionStorageKey) || '{}');
+function loadPresetsFromLocalStarage(): Presets{
+    const presetsFromStorage: Presets = JSON.parse(localStorage.getItem(localStorageKey) || '{}');
    
     const presets: Presets = {}
     for (const key in presetsFromStorage) {
