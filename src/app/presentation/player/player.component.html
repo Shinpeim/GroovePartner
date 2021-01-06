@@ -1,12 +1,25 @@
 <div>
-    <input type="button" value="play" (click)="play()">
-    <input type="button" value="stop" (click)="stop()">
-    bpm:
-    <input type="number" name="bpm" min="40" max="280" [(ngModel)]="bpm" (change)="bpmChanged()">
-    note:
-    <select name="note-length" [(ngModel)]="selectedNoteLength" (change)="noteLengthChanged()">
-        <ng-container *ngFor="let option of noteLengthOptions">
-            <option [ngValue]="option.value">{{option.label}}</option>
-        </ng-container>
-    </select>
+    <div>
+        load preset:
+        <select name="presets" [(ngModel)]="selectedPreset" (change)="presetSelected()">
+            <ng-container *ngFor="let option of presetsOptions">
+                <option [ngValue]="option.value">{{option.label}}</option>
+            </ng-container>
+        </select>
+        <input type="button" value="save as" (click)="saveAs()">
+        <input type="button" value="remove preset" (click)="removePreset()">
+    </div>
+
+    <div>
+        <input type="button" value="play" (click)="play()" [disabled]="playButtonDisabled">
+        <input type="button" value="stop" (click)="stop()">
+        bpm:
+        <input type="number" name="bpm" min="40" max="280" [(ngModel)]="bpm" (change)="bpmChanged()">
+        note:
+        <select name="note-length" [(ngModel)]="selectedNoteLength" (change)="noteLengthChanged()">
+            <ng-container *ngFor="let option of noteLengthOptions">
+                <option [ngValue]="option.value">{{option.label}}</option>
+            </ng-container>
+        </select>
+    </div>
 </div>
