@@ -4,7 +4,12 @@ import { SoundType } from "../soundType";
 export const availableNoteLengthes = [12, 16, 24] as const
 export type AvailableNoteLength = typeof availableNoteLengthes[number]
 
-class SequencerState {
+export type SerializedSequencerState = {
+    noteLength: AvailableNoteLength
+    notes: Array<SoundType>
+}
+
+class SequencerStateImpl {
     // 16分音符なら16, 8分音符なら8
     public noteLength: BehaviorSubject<AvailableNoteLength>
     public notes: Array<BehaviorSubject<SoundType>>
@@ -38,6 +43,32 @@ class SequencerState {
             this.notes.push(new BehaviorSubject<SoundType>("none") )
         }
     }
+
+    public unload(): SerializedSequencerState{
+        return {
+            noteLength: this.noteLength.getValue(),
+            notes: this.notes.map((s) => s.getValue())
+        }
+    }
+
+    public load(json: SerializedSequencerState): void {
+        this.setNoteLength(json.noteLength)
+        json.notes.forEach((s, i) => {
+            switch (s) {
+                case 'high':
+                    this.setNoteHigh(i)
+                    break
+                case 'low':
+                    this.setNoteLow(i)
+                    break;
+                case 'none':
+                    this.setNoteNone(i)
+                    break
+            }
+        })
+    }
 }
 
-export const sequencerState = new SequencerState(16)
+export type SequencerState = SequencerStateImpl
+
+export const sequencerState = new SequencerStateImpl(16)

@@ -1,10 +1,13 @@
-import { ThisReceiver } from "@angular/compiler"
 import { Ticker } from './ticker'
 import { BehaviorSubject } from "rxjs"
 import { sequencerState } from "../sequencer/state"
 import { sound } from "../sound"
 
-class PlayerState {
+export type SerializedPlayerState = {
+    bpm: number
+}
+
+class PlayerStateImpl {
     public bpm: BehaviorSubject<number>
     public playingState: BehaviorSubject<boolean>
     private sequencerState = sequencerState
@@ -57,6 +60,17 @@ class PlayerState {
         this.playingState.next(false)
         this.ticker.stop()
     }
+
+    public unload(): SerializedPlayerState {
+        return {
+            bpm: this.bpm.getValue()
+        }
+    }
+
+    public load(json: SerializedPlayerState) {
+        this.setBpm(json.bpm)
+    }
 }
 
-export const playerState = new PlayerState(120)
+export type PlayerState = PlayerStateImpl
+export const playerState = new PlayerStateImpl(120)
