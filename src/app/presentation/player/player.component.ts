@@ -27,6 +27,7 @@ export class PlayerComponent implements OnInit {
   selectedPreset: string
 
   playButtonDisabled = false
+  isPlaying = false
 
   constructor() {
     this.noteLengthOptions = availableNoteLengthes.map((length) => {
@@ -40,6 +41,9 @@ export class PlayerComponent implements OnInit {
 
     playerState.bpm.subscribe((bpm) => {
       this.bpm = bpm
+    })
+    playerState.playingState.subscribe((isPlaying) => {
+      this.isPlaying = isPlaying
     })
 
     const presetNames = loadPresetNames()
