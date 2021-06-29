@@ -11,8 +11,8 @@
     </div>
 
     <div>
-        <input type="button" value="play" (click)="play()" [disabled]="playButtonDisabled">
-        <input type="button" value="stop" (click)="stop()">
+        <input type="button" value="play" (click)="play()" [disabled]="isPlaying">
+        <input type="button" value="stop" (click)="stop()" [disabled]="!isPlaying">
         bpm:
         <input type="number" name="bpm" min="40" max="280" [(ngModel)]="bpm" (change)="bpmChanged()">
         note:
